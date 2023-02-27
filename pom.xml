@@ -11,10 +11,14 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.org.jboss.as.server>27.0.0.Final</version.org.jboss.as.server>
+        <version.org.jboss.as.server>27.0.1.Final</version.org.jboss.as.server>
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.source>17</maven.compiler.source>
-        <junit.version>5.9.2</junit.version>
+        <junit.version>4.13.2</junit.version>
+        <mockito.version>5.1.1</mockito.version>
+        <arquillian-core.version>1.7.0.Alpha14</arquillian-core.version>
+        <wildfly-arquillian-container.version>5.0.0.Alpha6</wildfly-arquillian-container.version>
+        <arquillian-ape.version>2.0.0-alpha.7.a1</arquillian-ape.version>
     </properties>
 
     <dependencyManagement>
@@ -49,38 +53,87 @@
         </dependency>
 
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.jboss.arquillian.junit5</groupId>
-            <artifactId>arquillian-junit5-container</artifactId>
-            <version>1.7.0.Alpha12</version>
+            <groupId>org.jboss.arquillian.config</groupId>
+            <artifactId>arquillian-config-api</artifactId>
+            <version>${arquillian-core.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.arquillian.config</groupId>
+                    <artifactId>arquillian-config-api</artifactId>
+                </exclusion></exclusions>
         </dependency>
         <dependency>
             <groupId>org.wildfly.arquillian</groupId>
             <artifactId>wildfly-arquillian-container-remote</artifactId>
-            <version>5.0.0.Alpha5</version>
+            <version>${wildfly-arquillian-container.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.arquillian.ape</groupId>
             <artifactId>arquillian-ape-sql-container-dbunit</artifactId>
-            <version>2.0.0-alpha.7.a1</version>
+            <version>${arquillian-ape.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>arquillian-container-test-impl-base</artifactId>
+                    <groupId>org.jboss.arquillian.container</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>arquillian-core-impl-base</artifactId>
+                    <groupId>org.jboss.arquillian.core</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>arquillian-test-impl-base</artifactId>
+                    <groupId>org.jboss.arquillian.test</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>arquillian-test-spi</artifactId>
+                    <groupId>org.jboss.arquillian.test</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>arquillian-config-impl-base</artifactId>
+                    <groupId>org.jboss.arquillian.config</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>arquillian-core-api</artifactId>
+                    <groupId>org.jboss.arquillian.core</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>arquillian-container-spi</artifactId>
+                    <groupId>org.jboss.arquillian.container</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>arquillian-core-spi</artifactId>
+                    <groupId>org.jboss.arquillian.core</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>arquillian-config-api</artifactId>
+                    <groupId>org.jboss.arquillian.config</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
